@@ -1,0 +1,23 @@
+{
+    "name": "tumen/xmlparser",
+    "description": "xml parser for gos zakupki",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tumen\\Xmlparser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tumen Dugarov",
+            "email": "t.dugarov@tanais.ru"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "v5.4.11",
+        "symfony/dom-crawler": "v5.4.11",
+        "symfony/css-selector": "v5.4.11",
+        "guzzlehttp/guzzle": "^7.4",
+        "ext-iconv": "*"
+    }
+}

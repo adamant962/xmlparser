@@ -1,0 +1,5 @@
+/.idea
+/vendor
+/composer.lock
+/data.csv
+/parse.php
