@@ -7,5 +7,5 @@ namespace Tumen\Xmlparser;
 interface RssLinkInterface
 {
     /* ссылка на документ */
-    public function getBodyLink(): object;
+    public function getBodyLink(): LinksInterface;
 }

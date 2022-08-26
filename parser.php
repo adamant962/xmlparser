@@ -5,13 +5,10 @@ if (empty($_SERVER['DOCUMENT_ROOT']))
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+use GuzzleHttp\Exception\GuzzleException;
 use Tumen\Xmlparser\RssLink;
 
-if (isset($_POST["link"])) {
-    $rss_link = $_POST["link"];
-} else {
-    die();
-}
+$rss_link='https://zakupki.gov.ru/epz/order/extendedsearch/rss.html?morphology=on&search-filter=Дате+размещения&pageNumber=1&sortDirection=false&recordsPerPage=_50&showLotsInfoHidden=false&sortBy=UPDATE_DATE&fz44=on&fz223=on&ppRf615=on&af=on&ca=on&pc=on&pa=on&priceFromGeneral=900000000&priceToGeneral=1000000000&currencyIdGeneral=-1&OrderPlacementSmallBusinessSubject=on&OrderPlacementRnpData=on&OrderPlacementExecutionRequirement=on&orderPlacement94_0=0&orderPlacement94_1=0&orderPlacement94_2=0';
 
 $rss = new RssLink(
     $rss_link
@@ -42,8 +39,10 @@ $rule_class = [
     'div.registry-entry__header-top__title'
 ];
 
-$arData = $rss->getBodyLink()->getLinks($url)->Parse($data_words, $word_class, $rule_class);
-
-$arData->createCsv();
-
-echo "<a href='data.csv' target='_blank'>скачать</a>";
+try {
+    $arData = $rss->getBodyLink()->getLinks($url)->Parse($data_words, $word_class, $rule_class)->createCsv();
+} catch (GuzzleException|Exception $e) {
+    echo $e->getMessage(). '\n';
+    echo $e->getLine(). '\n';
+    echo $e->getFile(). '\n';
+}
