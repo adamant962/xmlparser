@@ -7,5 +7,5 @@ namespace Tumen\Xmlparser;
 interface LinksInterface
 {
     /* массив детальных страниц */
-    public function getLinks(string $url): ParserXmlInterface;
+    public function getLinks(): ParserXmlInterface;
 }

@@ -5,51 +5,23 @@ declare(strict_types=1);
 namespace Tumen\Xmlparser;
 
 use Exception;
-use Symfony\Component\DomCrawler\Crawler;
 
 class Links implements LinksInterface
 {
-    private string $xml;
+    private array $arFilteredLinks;
 
-    public function __construct(string $xml)
+    public function __construct(array $arFilteredLinks)
     {
-        $this->xml = $xml;
+        $this->arFilteredLinks = $arFilteredLinks;
     }
 
     /**
      * @throws Exception
      */
-    public function getLinks(string $url): ParserXmlInterface
+    public function getLinks(): ParserXmlInterface
     {
-        $crawler = new Crawler($this->xml);
-        $link = $crawler->filter('link');
-
-        $arLink = [];
-        foreach ($link as $domElement) {
-            $arLink[] = $url . $domElement->textContent;
-        }
-
-        if (is_array($arLink))
-            return new ParserXml($arLink);
-
-        throw new Exception('Не удалось создать массив с ссылками');
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getPaginationLinks(string $url): ParserXmlInterface
-    {
-        $crawler = new Crawler($this->xml);
-        $link = $crawler->filter('div.registry-entry__header-mid__number')->filter('a');
-
-        $arLink = [];
-        foreach ($link as $domElement) {
-            $arLink[] = $url . $domElement->getAttribute('href');
-        }
-
-        if (is_array($arLink))
-            return new ParserXml($arLink);
+        if (!empty($this->arFilteredLinks))
+            return new ParserXml($this->arFilteredLinks);
 
         throw new Exception('Не удалось создать массив с ссылками');
     }
