@@ -33,7 +33,7 @@ class CsvCreate implements CsvCreateInterface
         if ($file) {
             $CSV_str = iconv("UTF-8", "cp1251", $CSV_str);
 
-            $done = file_put_contents($file, $CSV_str);
+            $done = file_put_contents($file, PHP_EOL . $CSV_str, FILE_APPEND);
 
             return $done ? $CSV_str : false;
         }

@@ -21,7 +21,7 @@ class RssLink implements RssLinkInterface
      * @throws GuzzleException
      * @throws Exception
      */
-    public function getBodyLink(): LinksInterface
+    public function getBodyLink(): FilterLinksInterface
     {
         /* получаем тело ссылки */
         $client = new Client();
@@ -30,11 +30,13 @@ class RssLink implements RssLinkInterface
             $this->rss_link
         );
 
-        $doc = (string)$response->getBody();
+        $xmlString = (string)$response->getBody();
+
+        $xmlBody = new FilterLinks($xmlString);
 
         /* создаем объект с телом ссылки */
-        if ($doc)
-            return new Links($doc);
+        if (!empty($xmlBody))
+            return $xmlBody;
 
         throw new Exception('Не удалось получить тело ссылки');
     }
