@@ -6,6 +6,8 @@ namespace Tumen\Xmlparser;
 
 interface LinksInterface
 {
-    /* массив детальных страниц */
-    public function getLinks(): ParserXmlInterface;
+    /**
+     * отправка в парсер
+     */
+    public function linksToParse(): ParserXmlInterface;
 }

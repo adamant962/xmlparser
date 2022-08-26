@@ -6,5 +6,8 @@ namespace Tumen\Xmlparser;
 
 interface ParserXmlInterface
 {
-    public function Parse(array $data_words, array $word_class, array $rule_class): CsvCreateInterface;
+    /**
+     * парсинг данных с указанными параметрами
+     */
+    public function Parse(array $data_words, array $word_class, array $rule_class, string $rule_name): CsvCreateInterface;
 }

@@ -23,18 +23,28 @@ class RssLink implements RssLinkInterface
      */
     public function getBodyLink(): FilterLinksInterface
     {
-        /* получаем тело ссылки */
+        /**
+         * получаем ссылку
+         */
         $client = new Client();
         $response = $client->request(
             'GET',
             $this->rss_link
         );
 
+        /**
+         * получаем тело ссылки
+         */
         $xmlString = (string)$response->getBody();
 
+        /**
+         * создаем обьект с данными для полседующей фильтрации
+         */
         $xmlBody = new FilterLinks($xmlString);
 
-        /* создаем объект с телом ссылки */
+        /**
+         * возврат объекта
+         */
         if (!empty($xmlBody))
             return $xmlBody;
 
