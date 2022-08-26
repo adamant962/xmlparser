@@ -34,4 +34,23 @@ class Links implements LinksInterface
 
         throw new Exception('Не удалось создать массив с ссылками');
     }
+
+    /**
+     * @throws Exception
+     */
+    public function getPaginationLinks(string $url): ParserXmlInterface
+    {
+        $crawler = new Crawler($this->xml);
+        $link = $crawler->filter('div.registry-entry__header-mid__number')->filter('a');
+
+        $arLink = [];
+        foreach ($link as $domElement) {
+            $arLink[] = $url . $domElement->getAttribute('href');
+        }
+
+        if (is_array($arLink))
+            return new ParserXml($arLink);
+
+        throw new Exception('Не удалось создать массив с ссылками');
+    }
 }
