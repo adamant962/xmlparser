@@ -17,8 +17,10 @@ class Links implements LinksInterface
 
     /**
      * @throws Exception
+     *
+     * отправка данных в парсер
      */
-    public function getLinks(): ParserXmlInterface
+    public function linksToParse(): ParserXmlInterface
     {
         if (!empty($this->arFilteredLinks))
             return new ParserXml($this->arFilteredLinks);
