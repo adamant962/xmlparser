@@ -7,6 +7,9 @@ if (empty($_SERVER['DOCUMENT_ROOT']))
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+/**
+ * тестовые данные
+ */
 $data_words = [
     'Наименование организации',
     'Место нахождения',
@@ -38,6 +41,9 @@ $countPage = 2;
 date_default_timezone_set('Europe/Moscow');
 $csvFileName = 'данные от ' . date("F j, Y, g:i:s a") . '.csv';
 
+$linkXml = "https://zakupki.gov.ru/epz/order/extendedsearch/rss.html?searchString=&morphology=on&search-filter=Дате+обновления&pageNumber=20&sortDirection=false&recordsPerPage=_50&showLotsInfoHidden=false&savedSearchSettingsIdHidden=&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&placingWayList=&selectedLaws=&priceFromGeneral=&priceFromGWS=&priceFromUnitGWS=&priceToGeneral=&priceToGWS=&priceToUnitGWS=&currencyIdGeneral=-1&publishDateFrom=&publishDateTo=&applSubmissionCloseDateFrom=&applSubmissionCloseDateTo=&customerIdOrg=&customerFz94id=&customerTitle=&okpd2Ids=&okpd2IdsCodes=";
+$xmlLinkTag = 'link';
+
 $link = new SendLink(
     $data_words,
     $word_class,
@@ -52,4 +58,5 @@ $link = new SendLink(
     $csvFileName
 );
 
-$link->SendLinkPagination();
+#$link->SendLinkPagination();
+$link->SendLinkXml($xmlLinkTag, $linkXml);
