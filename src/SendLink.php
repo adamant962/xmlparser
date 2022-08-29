@@ -19,7 +19,6 @@ class SendLink implements SendLinkInterface
     private string $rule_name;
     private int $countPage;
     private int $countElementsOnPage;
-    private string $csvFileName;
 
     public function __construct
     (
