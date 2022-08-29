@@ -9,5 +9,5 @@ interface CsvCreateInterface
     /**
      * запись в файл
      */
-    public function createCsv($file = null, $col_delimiter = ';', $row_delimiter = "\r\n");
+    public function createCsv($file, $col_delimiter = ';', $row_delimiter = "\r\n");
 }
