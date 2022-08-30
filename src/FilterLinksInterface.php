@@ -7,12 +7,17 @@ namespace Tumen\Xmlparser;
 interface FilterLinksInterface
 {
     /**
-     * получение ссылки по атрибуту
+     * Получение ссылки по атрибуту
      */
-    public function filterLinkAttribute(string $linkClass, string $linkClass2, string $domain, string $attributes): LinksInterface;
+    public function filterLinkAttribute(
+        string $linkClass,
+        string $linkClass2,
+        string $domain,
+        string $attributes
+    ): LinksInterface;
 
     /**
-     * получение ссылки по тексту
+     * Получение ссылки по тексту
      */
     public function filterLinkText(string $linkClass, string $domain): LinksInterface;
 }

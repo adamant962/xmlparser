@@ -7,7 +7,7 @@ namespace Tumen\Xmlparser;
 interface LinksInterface
 {
     /**
-     * отправка в парсер
+     * Отправка в парсер
      */
     public function linksToParse(): ParserXmlInterface;
 }

@@ -24,7 +24,7 @@ class RssLink implements RssLinkInterface
     public function getBodyLink(): FilterLinksInterface
     {
         /**
-         * получаем ссылку
+         * Получаем ссылку
          */
         $client = new Client();
         $response = $client->request(
@@ -33,20 +33,21 @@ class RssLink implements RssLinkInterface
         );
 
         /**
-         * получаем тело ссылки
+         * Получаем тело ссылки
          */
         $xmlString = (string)$response->getBody();
 
         /**
-         * создаем обьект с данными для полседующей фильтрации
+         * Создаем объект с данными для последующей фильтрации
          */
         $xmlBody = new FilterLinks($xmlString);
 
         /**
-         * возврат объекта
+         * Возврат объекта
          */
-        if (!empty($xmlBody))
+        if (!empty($xmlBody)) {
             return $xmlBody;
+        }
 
         throw new Exception('Не удалось получить тело ссылки');
     }

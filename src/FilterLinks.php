@@ -21,18 +21,22 @@ class FilterLinks implements FilterLinksInterface
      */
 
     /**
-     * получение массива ссылок для последующей фильтрации
+     * Получение массива ссылок для последующей фильтрации
      */
-    public function filterLinkAttribute (string $linkClass, string $linkClass2, string $domain, string $attributes): LinksInterface
-    {
+    public function filterLinkAttribute(
+        string $linkClass,
+        string $linkClass2,
+        string $domain,
+        string $attributes
+    ): LinksInterface {
         /**
-         * фильтрация по родителя и его ребенку
+         * Фильтрация по родителя и его ребенку
          */
         $crawler = new Crawler($this->bodyLink);
         $link = $crawler->filter($linkClass)->filter($linkClass2);
 
         /**
-         * получение ссылок на детальную чтраницу по атриббуту
+         * Получение ссылок на детальную страницу по атрибуту
          */
         $arFilteredLinks = [];
         foreach ($link as $domElement) {
@@ -41,7 +45,7 @@ class FilterLinks implements FilterLinksInterface
         }
 
         /**
-         * полученные данные отправляем в объект для последующего парсинга
+         * Полученные данные отправляем в объект для последующего парсинга
          */
         return new Links($arFilteredLinks);
     }
@@ -52,7 +56,7 @@ class FilterLinks implements FilterLinksInterface
         $link = $crawler->filter($linkClass);
 
         /**
-         * получение ссылок на детальную страницу по соддержания селектора
+         * Получение ссылок на детальную страницу по содержания селектора
          */
         $arLink = [];
         foreach ($link as $domElement) {
