@@ -103,6 +103,6 @@ class ParserXml implements ParserXmlInterface
             return new FormattingData($rsData);
         }
 
-        throw new Exception('Не удалось получить данные');
+        throw new Exception('Не удалось получить и отфильтровать данные');
     }
 }

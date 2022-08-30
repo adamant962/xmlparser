@@ -22,6 +22,7 @@ class FilterLinks implements FilterLinksInterface
 
     /**
      * Получение массива ссылок для последующей фильтрации
+     * @throws Exception
      */
     public function filterLinkAttribute(
         string $linkClass,
@@ -47,9 +48,15 @@ class FilterLinks implements FilterLinksInterface
         /**
          * Полученные данные отправляем в объект для последующего парсинга
          */
-        return new Links($arFilteredLinks);
+        if (is_array($arFilteredLinks))
+            return new Links($arFilteredLinks);
+
+        throw new Exception('Не удалось отфильтровать и получить ссылки по атрибуту');
     }
 
+    /**
+     * @throws Exception
+     */
     public function filterLinkText(string $linkClass, string $domain): LinksInterface
     {
         $crawler = new Crawler($this->bodyLink);
@@ -62,6 +69,10 @@ class FilterLinks implements FilterLinksInterface
         foreach ($link as $domElement) {
             $arLink[] = $domain . $domElement->textContent;
         }
-        return new Links($arLink);
+
+        if(is_array($arLink))
+            return new Links($arLink);
+
+        throw new Exception('Не удалось отфильтровать и получить ссылки по тексту');
     }
 }

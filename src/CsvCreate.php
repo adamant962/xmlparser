@@ -34,6 +34,6 @@ class CsvCreate implements CsvCreateInterface
             return $done ? $this->CSV_str : false;
         }
 
-        return $this->CSV_str;
+        return true;
     }
 }

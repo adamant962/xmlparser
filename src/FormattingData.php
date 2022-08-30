@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tumen\Xmlparser;
 
+use Exception;
+
 class FormattingData implements FormattingDataInterface
 {
     private array $rsData;
@@ -13,6 +15,9 @@ class FormattingData implements FormattingDataInterface
         $this->rsData = $rsData;
     }
 
+    /**
+     * @throws Exception
+     */
     public function formatData($col_delimiter = ';', $row_delimiter = "\r\n"): CsvCreateInterface
     {
         /**
@@ -53,6 +58,9 @@ class FormattingData implements FormattingDataInterface
          */
         $CSV_str = rtrim($CSV_str, $row_delimiter);
 
-        return new CsvCreate($CSV_str);
+        if (!empty($CSV_str))
+            return new CsvCreate($CSV_str);
+
+        throw new Exception('Не удалось отформатировать данные для записи');
     }
 }

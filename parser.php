@@ -43,7 +43,7 @@ $domain = 'https://zakupki.gov.ru';
 $rule_name = 'Закон';
 
 $countElementsOnPage = 50;
-$countPage = 20;
+$countPage = 5;
 
 $linkXml = "https://zakupki.gov.ru/epz/order/extendedsearch/rss.html?searchString=&morphology=on&search-filter=Дате+обновления&pageNumber=20&sortDirection=false&recordsPerPage=_50&showLotsInfoHidden=false&savedSearchSettingsIdHidden=&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&placingWayList=&selectedLaws=&priceFromGeneral=&priceFromGWS=&priceFromUnitGWS=&priceToGeneral=&priceToGWS=&priceToUnitGWS=&currencyIdGeneral=-1&publishDateFrom=&publishDateTo=&applSubmissionCloseDateFrom=&applSubmissionCloseDateTo=&customerIdOrg=&customerFz94id=&customerTitle=&okpd2Ids=&okpd2IdsCodes=";
 $xmlLinkTag = 'link';
