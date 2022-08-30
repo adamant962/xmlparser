@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Tumen\Xmlparser;
 
 use Exception;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DomCrawler\Crawler;
+use GuzzleHttp\Client;
 
 class ParserXml implements ParserXmlInterface
 {
     private array $arLinks;
+    private Client $client;
+
 
     public function __construct(array $arLinks)
     {
         $this->arLinks = $arLinks;
+        $this->client = new Client();
     }
 
     /**
@@ -31,7 +34,6 @@ class ParserXml implements ParserXmlInterface
         string $rule_name
     ): FormattingDataInterface {
         $rsData = [];
-        $client = new Client();
 
         /**
          * Перебор массива ссылок
@@ -42,7 +44,7 @@ class ParserXml implements ParserXmlInterface
              *
              * используем Crawler для фильтрации данных по словам
              */
-            $detail = $client->request('GET', $one_link);
+            $detail = $this->client->request('GET', $one_link);
             $detail_page = (string)$detail->getBody();
 
             $detail_body = new Crawler($detail_page);

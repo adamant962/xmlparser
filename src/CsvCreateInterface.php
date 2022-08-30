@@ -7,7 +7,7 @@ namespace Tumen\Xmlparser;
 interface CsvCreateInterface
 {
     /**
-     * запись в файл
+     * Запись в файл
      */
     public function createCsv($file);
 }

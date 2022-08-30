@@ -34,6 +34,7 @@ class FilterLinks implements FilterLinksInterface
          * Фильтрация по родителя и его ребенку
          */
         $crawler = new Crawler($this->bodyLink);
+
         $link = $crawler->filter($linkClass)->filter($linkClass2);
 
         /**
@@ -60,6 +61,7 @@ class FilterLinks implements FilterLinksInterface
     public function filterLinkText(string $linkClass, string $domain): LinksInterface
     {
         $crawler = new Crawler($this->bodyLink);
+
         $link = $crawler->filter($linkClass);
 
         /**

@@ -11,10 +11,12 @@ use GuzzleHttp\Exception\GuzzleException;
 class RssLink implements RssLinkInterface
 {
     private string $rss_link;
+    private Client $client;
 
-    public function __construct($rss_link)
+    public function __construct(string $rss_link)
     {
         $this->rss_link = $rss_link;
+        $this->client = new Client();
     }
 
     /**
@@ -26,8 +28,7 @@ class RssLink implements RssLinkInterface
         /**
          * Получаем ссылку
          */
-        $client = new Client();
-        $response = $client->request(
+        $response = $this->client->request(
             'GET',
             $this->rss_link
         );
