@@ -18,12 +18,13 @@ class Links implements LinksInterface
     /**
      * @throws Exception
      *
-     * отправка данных в парсер
+     * Отправка данных в парсер
      */
     public function linksToParse(): ParserXmlInterface
     {
-        if (!empty($this->arFilteredLinks))
+        if (!empty($this->arFilteredLinks)) {
             return new ParserXml($this->arFilteredLinks);
+        }
 
         throw new Exception('Не удалось создать массив с ссылками');
     }

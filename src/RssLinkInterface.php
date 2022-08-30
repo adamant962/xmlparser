@@ -7,7 +7,7 @@ namespace Tumen\Xmlparser;
 interface RssLinkInterface
 {
     /**
-     * создаем обьект с данными для полседующей фильтрации
+     * Создаем объект с данными для последующей фильтрации
      */
     public function getBodyLink(): FilterLinksInterface;
 }

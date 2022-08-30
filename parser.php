@@ -2,13 +2,14 @@
 
 use Tumen\Xmlparser\SendLink;
 
-if (empty($_SERVER['DOCUMENT_ROOT']))
+if (empty($_SERVER['DOCUMENT_ROOT'])) {
     $_SERVER['DOCUMENT_ROOT'] = getcwd();
+}
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 /**
- * тестовые данные
+ * Тестовые данные
  */
 $data_words = [
     'Наименование организации',
@@ -20,7 +21,12 @@ $data_words = [
     'Организация, осуществляющая размещение',
     'Наименование объекта закупки',
     'Ответственное должностное лицо',
-    'Номер контактного телефона'
+    'Номер контактного телефона',
+    /*структурированный*/
+    'Телефон',
+    'Наименование Заказчика',
+    'Место нахождения (адрес)',
+    'ФИО лица, утвердившего план-график закупок'
 ];
 $word_class = [
     'section.blockInfo__section' => 'span.section__info',
@@ -36,10 +42,8 @@ $filterChild = 'a';
 $domain = 'https://zakupki.gov.ru';
 $rule_name = 'Закон';
 
-$countElementsOnPage = 10;
-$countPage = 2;
-date_default_timezone_set('Europe/Moscow');
-$csvFileName = 'данные от ' . date("F j, Y, g:i:s a") . '.csv';
+$countElementsOnPage = 50;
+$countPage = 20;
 
 $linkXml = "https://zakupki.gov.ru/epz/order/extendedsearch/rss.html?searchString=&morphology=on&search-filter=Дате+обновления&pageNumber=20&sortDirection=false&recordsPerPage=_50&showLotsInfoHidden=false&savedSearchSettingsIdHidden=&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&placingWayList=&selectedLaws=&priceFromGeneral=&priceFromGWS=&priceFromUnitGWS=&priceToGeneral=&priceToGWS=&priceToUnitGWS=&currencyIdGeneral=-1&publishDateFrom=&publishDateTo=&applSubmissionCloseDateFrom=&applSubmissionCloseDateTo=&customerIdOrg=&customerFz94id=&customerTitle=&okpd2Ids=&okpd2IdsCodes=";
 $xmlLinkTag = 'link';
@@ -54,9 +58,8 @@ $link = new SendLink(
     $domain,
     $rule_name,
     $countPage,
-    $countElementsOnPage,
-    $csvFileName
+    $countElementsOnPage
 );
 
-#$link->SendLinkPagination();
-$link->SendLinkXml($xmlLinkTag, $linkXml);
+$link->SendLinkPagination();
+#$link->SendLinkXml($xmlLinkTag, $linkXml);
