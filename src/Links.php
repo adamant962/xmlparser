@@ -26,6 +26,6 @@ class Links implements LinksInterface
             return new ParserXml($this->arFilteredLinks);
         }
 
-        throw new Exception('Не удалось создать массив с ссылками');
+        throw new Exception('Не удалось получить массив данных с ссылками');
     }
 }
