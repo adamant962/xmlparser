@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tumen\Xmlparser;
 
 use Exception;
-use Symfony\Component\DomCrawler\Crawler;
+use Tumen\Xmlparser\Traits\CrawlerObject;
 
 class FilterLinks implements FilterLinksInterface
 {
+    use CrawlerObject;
+
     private string $bodyLink;
 
     public function __construct(string $bodyLink)
@@ -33,7 +35,8 @@ class FilterLinks implements FilterLinksInterface
         /**
          * Фильтрация по родителя и его ребенку
          */
-        $crawler = new Crawler($this->bodyLink);
+        $crawler = $this->Crawler($this->bodyLink);
+
         $link = $crawler->filter($linkClass)->filter($linkClass2);
 
         /**
@@ -59,7 +62,8 @@ class FilterLinks implements FilterLinksInterface
      */
     public function filterLinkText(string $linkClass, string $domain): LinksInterface
     {
-        $crawler = new Crawler($this->bodyLink);
+        $crawler = $this->Crawler($this->bodyLink);
+
         $link = $crawler->filter($linkClass);
 
         /**

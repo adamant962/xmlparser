@@ -7,7 +7,7 @@ namespace Tumen\Xmlparser;
 interface ParserXmlInterface
 {
     /**
-     * парсинг данных с указанными параметрами
+     * Парсинг данных с указанными параметрами
      */
     public function Parse(array $data_words, array $word_class, array $rule_class, string $rule_name): FormattingDataInterface;
 }
