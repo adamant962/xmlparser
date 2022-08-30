@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace Tumen\Xmlparser;
 
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Tumen\Xmlparser\Traits\ClientObject;
 
 class RssLink implements RssLinkInterface
 {
-    use ClientObject;
-
     private string $rss_link;
-    private object $client;
+    private Client $client;
 
-    public function __construct($rss_link)
+    public function __construct(string $rss_link)
     {
         $this->rss_link = $rss_link;
-        $this->client = $this->newClient();
+        $this->client = new Client();
     }
 
     /**

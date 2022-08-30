@@ -7,21 +7,18 @@ namespace Tumen\Xmlparser;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DomCrawler\Crawler;
-use Tumen\Xmlparser\Traits\ClientObject;
-use Tumen\Xmlparser\Traits\CrawlerObject;
+use GuzzleHttp\Client;
 
 class ParserXml implements ParserXmlInterface
 {
-    use ClientObject;
-    use CrawlerObject;
-
     private array $arLinks;
-    private object $client;
+    private Client $client;
+
 
     public function __construct(array $arLinks)
     {
         $this->arLinks = $arLinks;
-        $this->client = $this->newClient();
+        $this->client = new Client();
     }
 
     /**
@@ -50,7 +47,7 @@ class ParserXml implements ParserXmlInterface
             $detail = $this->client->request('GET', $one_link);
             $detail_page = (string)$detail->getBody();
 
-            $detail_body = $this->Crawler($detail_page);
+            $detail_body = new Crawler($detail_page);
 
             /**
              * Перебираем массив классов(который мы задали) для фильтрации по ним родитель -> ребенок
