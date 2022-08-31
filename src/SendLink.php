@@ -57,6 +57,8 @@ class SendLink implements SendLinkInterface
              *
              * @var int $this- >countElementsOnPage количество элементов на странице
              * @var int $this- >countPage количество страниц
+             *
+             * для Mac OS в Encode указать второй параметр MacCyrillic
              */
             $rss_link = 'https://zakupki.gov.ru/epz/orderplan/search/results.html?morphology=on&search-filter=Дате+размещения&structuredCheckBox=on&structured=true&notStructured=false&fz44=on&actualPeriodRangeYearFrom=2022&actualPeriodRangeYearTo=2023&customerPlace=5277335%2C5277327&customerPlaceCodes=77000000000%2C50000000000&sortBy=BY_MODIFY_DATE&pageNumber=' . $i . '&sortDirection=false&recordsPerPage=_' . $this->countElementsOnPage . '&showLotsInfoHidden=false&searchType=false';
 
@@ -70,6 +72,7 @@ class SendLink implements SendLinkInterface
                     ->linksToParse()
                     ->Parse($this->data_words, $this->word_class, $this->rule_class, $this->rule_name)
                     ->formatData()
+                    ->Encode("UTF-8", "cp1251")
                     ->createCsv();
             } catch (GuzzleException|Exception $e) {
                 echo $e->getMessage() . "\n";
@@ -101,6 +104,7 @@ class SendLink implements SendLinkInterface
                 ->linksToParse()
                 ->Parse($this->data_words, $this->word_class, $this->rule_class, $this->rule_name)
                 ->formatData()
+                ->Encode()
                 ->createCsv();
         } catch (GuzzleException|Exception $e) {
             echo $e->getMessage() . "\n";
