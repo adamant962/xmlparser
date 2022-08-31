@@ -18,12 +18,12 @@ class FormattingData implements FormattingDataInterface
     /**
      * @throws Exception
      */
-    public function formatData($col_delimiter = ';', $row_delimiter = "\r\n"): CsvCreateInterface
+    public function formatData($col_delimiter = ';', $row_delimiter = "\r\n"): EncodingInterface
     {
         /**
          * Переменная для записи
          */
-        $CSV_str = '';
+        $csvStr = '';
 
         /**
          * Перебор данных для записи
@@ -51,15 +51,15 @@ class FormattingData implements FormattingDataInterface
             /**
              * Записываем в переменную, вставляя разделитель и переносы строк
              */
-            $CSV_str .= implode($col_delimiter, $row) . $row_delimiter;
+            $csvStr .= implode($col_delimiter, $row) . $row_delimiter;
         }
         /**
          * Удаляем пробел из конца строки
          */
-        $CSV_str = rtrim($CSV_str, $row_delimiter);
+        $csvStr = rtrim($csvStr, $row_delimiter);
 
-        if (!empty($CSV_str))
-            return new CsvCreate($CSV_str);
+        if (!empty($csvStr))
+            return new Encoding($csvStr);
 
         throw new Exception('Не удалось отформатировать данные для записи');
     }
